@@ -1,0 +1,22 @@
+server:
+
+  servlet:
+    context-path: /api
+
+spring:
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/item?useUnicode=true&characterEncoding=UTF8
+    username: postgres
+    password: postgres
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+
+  liquibase:
+    change-log: liquibase/master.xml
+    enabled: true
+    contexts: dev
