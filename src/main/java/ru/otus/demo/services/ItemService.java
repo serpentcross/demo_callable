@@ -40,7 +40,7 @@ public class ItemService {
     public List<Item> getAllFast() throws ExecutionException, InterruptedException {
 
         ExecutorService executorService = Executors.newFixedThreadPool(10);
-        
+
         List<Item> items = new ArrayList<>();
 
         List<Future<List<Item>>> futureList = new ArrayList<>();
@@ -62,31 +62,31 @@ public class ItemService {
 
     }
 
-    public List<Item> getAllIn(List<UUID> ids) {
+    public List<Item> getAllIn(final List<UUID> ids) {
         return itemRepository.findAllById(ids);
     }
 
-    public Item getOne(UUID id) {
+    public Item getOne(final UUID id) {
         return itemRepository.findById(id).orElseThrow(() -> new Code404ItemNotFoundException(Item.class, id));
     }
 
-    public Item createOne(String name, boolean available) {
+    public Item createOne(final String name, final boolean available) {
         return mergeEntityResult(Item.builder().name(name).available(available).added(LocalDate.now()).build());
     }
 
     @Transactional
-    public Item updateOne(UUID id, ItemDto itemDto) {
+    public Item updateOne(final UUID id, final ItemDto itemDto) {
         Item old = getOne(id);
         old.setName(itemDto.getName());
         old.setAvailable(itemDto.isAvailable());
         return mergeEntityResult(old);
     }
 
-    public void deleteOne(UUID id) {
+    public void deleteOne(final UUID id) {
         itemRepository.deleteById(id);
     }
 
-    private Item mergeEntityResult(Item item) {
+    private Item mergeEntityResult(final Item item) {
         return itemRepository.save(item);
     }
 

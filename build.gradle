@@ -1,71 +1,54 @@
 plugins {
-    id "org.springframework.boot" version "3.0.6"
+    id "org.springframework.boot" version "4.0.1"
     id "io.spring.dependency-management" version "1.0.8.RELEASE"
     id "java"
 }
 
-apply plugin: "java"
-apply plugin: "io.spring.dependency-management"
-
 group = "ru.otus.demo"
 version = "0.0.1"
 description = "demo-api"
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+    genCompile.extendsFrom compile
+}
 
 repositories {
     mavenLocal()
     mavenCentral()
 }
 
-def lombokVersion = "1.18.26"
-
-def hibernateModelGen = "6.2.2.Final"
-def postgreSqlVersion = "42.5.4"
-def springBootVersion = '3.1.0'
-def mapStructVersion = "1.5.5.Final"
+def lombokMapstructBindingVersion = "0.2.0"
+def mapStructVersion = "1.6.3"
 
 dependencies {
 
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}")
-    implementation("org.springframework.boot:spring-boot-starter-validation:${springBootVersion}")
-    implementation("org.springframework.boot:spring-boot-starter-undertow:${springBootVersion}")
-    implementation("org.springframework.boot:spring-boot-starter-web:${springBootVersion}") {
-        exclude module: 'spring-boot-starter-tomcat'
-    }
+    implementation("org.springframework.boot:spring-boot-h2console")
+    implementation("org.springframework.boot:spring-boot-jackson2")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("org.springframework.boot:spring-boot-starter-liquibase")
+    implementation("org.springframework.boot:spring-boot-starter-webmvc")
 
-    implementation("org.liquibase:liquibase-core:4.20.0")
+    runtimeOnly("com.h2database:h2")
+    runtimeOnly("org.postgresql:postgresql")
 
-    compileOnly("org.projectlombok:lombok:${lombokVersion}")
-    annotationProcessor("org.projectlombok:lombok:${lombokVersion}")
+    compileOnly("org.mapstruct:mapstruct:${mapStructVersion}")
+    compileOnly("org.projectlombok:lombok")
 
-    compileOnly "org.hibernate:hibernate-jpamodelgen:${hibernateModelGen}"
-    annotationProcessor "org.hibernate:hibernate-jpamodelgen:${hibernateModelGen}"
-
-    implementation("org.mapstruct:mapstruct:${mapStructVersion}")
     annotationProcessor("org.mapstruct:mapstruct-processor:${mapStructVersion}")
+    annotationProcessor("org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}")
+    annotationProcessor("org.projectlombok:lombok")
 
-    runtimeOnly("org.springframework.boot:spring-boot-devtools:${springBootVersion}")
-    runtimeOnly("org.postgresql:postgresql:${postgreSqlVersion}")
-
-    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0")
+    testImplementation("org.springframework.boot:spring-boot-starter-data-jpa-test")
+    testImplementation("org.springframework.boot:spring-boot-starter-liquibase-test")
+    testImplementation("org.springframework.boot:spring-boot-starter-webmvc-test")
     testImplementation("com.h2database:h2")
-    testImplementation("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
-
-    testImplementation("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
-    testCompileOnly("org.projectlombok:lombok:${lombokVersion}")
-    testAnnotationProcessor("org.projectlombok:lombok:${lombokVersion}")
-    testImplementation("com.h2database:h2")
-
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
-configurations {
-    compileOnly {
-        extendsFrom annotationProcessor
-    }
-    compile.exclude module: "spring-boot-starter-tomcat"
-    genCompile.extendsFrom compile
-}
-
-tasks.withType(Test) {
+tasks.withType(Test).configureEach {
     useJUnitPlatform()
 
     testLogging {

@@ -27,19 +27,19 @@ public class ItemConverter {
         return itemMapper.toDtoList(itemService.getAllFast());
     }
 
-    public ItemDto getOne(UUID id) {
+    public ItemDto getOne(final UUID id) {
         return itemMapper.toDto(itemService.getOne(id));
     }
 
-    public ItemDto createOne(String name, boolean vegetable) {
+    public ItemDto createOne(final String name, final boolean vegetable) {
         return itemMapper.toDto(itemService.createOne(name, vegetable));
     }
 
-    public ItemDto updateOne(UUID id, ItemDto ingredientDto) {
+    public ItemDto updateOne(final UUID id, final ItemDto ingredientDto) {
         return itemMapper.toDto(itemService.updateOne(id, ingredientDto));
     }
 
-    public void deleteOne(UUID id) {
+    public void deleteOne(final UUID id) {
         itemService.deleteOne(id);
     }
 

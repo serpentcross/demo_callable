@@ -4,11 +4,11 @@ import com.fasterxml.jackson.core.type.TypeReference;
 
 import org.junit.jupiter.api.Test;
 
-import org.springframework.boot.test.mock.mockito.MockBean;
 
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.MediaType;
 
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import ru.otus.demo.AbstractControllerTest;
 import ru.otus.demo.callables.ItemCallable;
 import ru.otus.demo.converters.ItemConverter;
@@ -38,10 +38,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 public class ItemControllerTest extends AbstractControllerTest {
 
-    @MockBean
+    @MockitoBean
     private ItemConverter itemConverter;
 
-    @MockBean
+    @MockitoBean
     private ItemCallable itemCallable;
 
 

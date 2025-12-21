@@ -16,7 +16,6 @@ public class ItemCallable implements Callable<List<Item>> {
 
     private final ItemRepository itemRepository;
 
-
     @Override
     public List<Item> call() {
         return itemRepository.findAll();

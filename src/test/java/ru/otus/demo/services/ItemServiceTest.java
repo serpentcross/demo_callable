@@ -17,25 +17,25 @@ import static org.springframework.test.util.AssertionErrors.assertFalse;
 
 @SpringBootTest
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class ItemServiceTest {
+class ItemServiceTest {
 
     @Autowired
     private ItemService itemService;
 
     @Test
-    public void mustExtractExactDtoById() {
+    void mustExtractExactDtoById() {
         assertEquals("QH8NbyGuH7", itemService.getOne(UUID.fromString("7b2bd50f-95b2-4674-97ff-7cc9349b95d4")).getName());
     }
 
     @Test
-    public void mustDeleteOneEntity() {
+    void mustDeleteOneEntity() {
         itemService.deleteOne(UUID.fromString("0ef0f4cf-1d80-427f-9669-715f69f00456"));
         assertEquals(4, itemService.getAll().size());
         itemService.createOne("Yogurt", false);
     }
 
     @Test
-    public void mustUpdateOneEntity() {
+    void mustUpdateOneEntity() {
 
         UUID id = UUID.fromString("fa441a3d-db5b-4ac4-bffc-4d7596e3438b");
 

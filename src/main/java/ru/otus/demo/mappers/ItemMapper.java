@@ -9,8 +9,8 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface ItemMapper {
-    Item toEntity(ItemDto ingredientDto);
-    ItemDto toDto(Item ingredient);
-    List<ItemDto> toDtoList(List<Item> ingredients);
-    List<Item> toEntityList(List<ItemDto> ingredients);
+    Item toEntity(final ItemDto itemDto);
+    ItemDto toDto(final Item item);
+    List<ItemDto> toDtoList(final List<Item> items);
+    List<Item> toEntityList(final List<ItemDto> itemDtos);
 }

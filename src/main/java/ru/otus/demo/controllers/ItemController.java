@@ -30,7 +30,7 @@ public class ItemController {
     private final ItemConverter itemConverter;
 
     @GetMapping("/{id}")
-    public ItemDto one(@PathVariable UUID id) {
+    public ItemDto one(@PathVariable final UUID id) {
         return itemConverter.getOne(id);
     }
 
@@ -46,7 +46,7 @@ public class ItemController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ItemDto create(@RequestParam String name, @RequestParam boolean available) {
+    public ItemDto create(@RequestParam final String name, @RequestParam final boolean available) {
         return itemConverter.createOne(name, available);
     }
 
@@ -57,7 +57,7 @@ public class ItemController {
     }
 
     @PutMapping("/{id}")
-    public ItemDto update(@PathVariable UUID id, @RequestBody ItemDto itemDto) {
+    public ItemDto update(@PathVariable final UUID id, @RequestBody final ItemDto itemDto) {
         return itemConverter.updateOne(id, itemDto);
     }
 

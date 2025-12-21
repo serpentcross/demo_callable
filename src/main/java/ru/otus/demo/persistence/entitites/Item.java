@@ -3,11 +3,11 @@ package ru.otus.demo.persistence.entitites;
 import jakarta.persistence.Entity;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDate;
 import java.util.Objects;
@@ -15,10 +15,10 @@ import java.util.Objects;
 @Entity
 @Getter
 @Setter
-@Builder
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@SuperBuilder(toBuilder = true)
 public class Item extends AbstractPersistableEntity {
 
     private String name;
