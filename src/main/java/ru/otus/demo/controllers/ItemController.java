@@ -20,7 +20,6 @@ import ru.otus.demo.dtos.ItemDto;
 
 import java.util.List;
 import java.util.UUID;
-import java.util.concurrent.ExecutionException;
 
 @RestController
 @RequiredArgsConstructor
@@ -37,11 +36,6 @@ public class ItemController {
     @GetMapping
     public List<ItemDto> all() {
         return itemConverter.getAll();
-    }
-
-    @GetMapping("/fast")
-    public List<ItemDto> allFast() throws ExecutionException, InterruptedException {
-        return itemConverter.getAllFast();
     }
 
     @PostMapping

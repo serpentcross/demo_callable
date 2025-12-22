@@ -10,7 +10,6 @@ import ru.otus.demo.services.ItemService;
 
 import java.util.List;
 import java.util.UUID;
-import java.util.concurrent.ExecutionException;
 
 @Component
 @RequiredArgsConstructor
@@ -23,20 +22,16 @@ public class ItemConverter {
         return itemMapper.toDtoList(itemService.getAll());
     }
 
-    public List<ItemDto> getAllFast() throws ExecutionException, InterruptedException {
-        return itemMapper.toDtoList(itemService.getAllFast());
-    }
-
     public ItemDto getOne(final UUID id) {
         return itemMapper.toDto(itemService.getOne(id));
     }
 
-    public ItemDto createOne(final String name, final boolean vegetable) {
-        return itemMapper.toDto(itemService.createOne(name, vegetable));
+    public ItemDto createOne(final String name, final boolean available) {
+        return itemMapper.toDto(itemService.createOne(name, available));
     }
 
-    public ItemDto updateOne(final UUID id, final ItemDto ingredientDto) {
-        return itemMapper.toDto(itemService.updateOne(id, ingredientDto));
+    public ItemDto updateOne(final UUID id, final ItemDto itemDto) {
+        return itemMapper.toDto(itemService.updateOne(id, itemDto));
     }
 
     public void deleteOne(final UUID id) {

@@ -4,13 +4,11 @@ import com.fasterxml.jackson.core.type.TypeReference;
 
 import org.junit.jupiter.api.Test;
 
-
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.MediaType;
-
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
+
 import ru.otus.demo.AbstractControllerTest;
-import ru.otus.demo.callables.ItemCallable;
 import ru.otus.demo.converters.ItemConverter;
 import ru.otus.demo.dtos.ItemDto;
 
@@ -40,10 +38,6 @@ public class ItemControllerTest extends AbstractControllerTest {
 
     @MockitoBean
     private ItemConverter itemConverter;
-
-    @MockitoBean
-    private ItemCallable itemCallable;
-
 
     @Test
     @Override
