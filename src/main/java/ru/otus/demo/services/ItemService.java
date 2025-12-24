@@ -38,7 +38,7 @@ public class ItemService {
     public Item updateOne(final UUID id, final ItemDto itemDto) {
         Item old = getOne(id);
         old.setName(itemDto.getName());
-        old.setAvailable(itemDto.isAvailable());
+        old.setAvailable(Boolean.TRUE.equals(itemDto.getAvailable()));
         return mergeEntityResult(old);
     }
 

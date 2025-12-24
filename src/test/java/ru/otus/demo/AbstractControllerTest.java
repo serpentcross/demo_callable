@@ -3,6 +3,7 @@ package ru.otus.demo;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.TestInstance;
 
@@ -23,11 +24,11 @@ public abstract class AbstractControllerTest {
 
     protected MockMvc mockMvc;
 
-    protected final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
+    protected final ObjectMapper objectMapper = new ObjectMapper();
 
     @BeforeAll
     public void setUp() {
-        OBJECT_MAPPER.registerModule(new JavaTimeModule());
+        objectMapper.registerModule(new JavaTimeModule());
         mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
     }
 

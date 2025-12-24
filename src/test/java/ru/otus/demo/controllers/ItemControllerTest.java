@@ -44,7 +44,7 @@ public class ItemControllerTest extends AbstractControllerTest {
     public void testMustReturnCorrectObjectByGivenId() throws Exception {
 
         given(itemConverter.getOne(any(UUID.class))).willReturn(
-            OBJECT_MAPPER.readValue(new ClassPathResource("mocks/item/item.json").getFile(), ItemDto.class)
+            objectMapper.readValue(new ClassPathResource("mocks/item/item.json").getFile(), ItemDto.class)
         );
 
         mockMvc
@@ -63,7 +63,7 @@ public class ItemControllerTest extends AbstractControllerTest {
     @Override
     public void testMustSuccessfullyReturnListOfObjects() throws Exception {
         given(itemConverter.getAll()).willReturn(
-            OBJECT_MAPPER.readValue(new ClassPathResource("mocks/item/items.json").getFile(), new TypeReference<>() {})
+            objectMapper.readValue(new ClassPathResource("mocks/item/items.json").getFile(), new TypeReference<>() {})
         );
 
         mockMvc
@@ -126,7 +126,7 @@ public class ItemControllerTest extends AbstractControllerTest {
     @Override
     public void testMustSuccessfullyUpdatePersistedObject() throws Exception {
 
-        ItemDto ingredientDto = OBJECT_MAPPER.readValue(
+        ItemDto ingredientDto = objectMapper.readValue(
             new ClassPathResource("mocks/item/item_updated.json").getFile(),
             ItemDto.class
         );

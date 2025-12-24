@@ -1,0 +1,218 @@
+---
+openapi: 3.0.3
+info:
+  title: OpenAPI definition
+  version: v1
+servers:
+  - url: http://localhost:8080
+    description: Generated server url
+paths:
+  "/items/{id}":
+    get:
+      tags:
+        - item-controller
+      summary: Get one item by given id.
+      operationId: oneItem
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        200:
+          description: Operation was successful!
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ItemDto"
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ItemDto"
+#        '400':
+#          description: Error! One or several parameters do not match proper values!
+#          content:
+#            application/json:
+#              schema:
+#                "$ref": "#/components/schemas/ExceptionDto"
+#            "*/*":
+#              schema:
+#                "$ref": "#/components/schemas/ExceptionDto"
+#        404:
+#          description: Error! No entity was found by given identifier!
+#          content:
+#            application/json:
+#              schema:
+#                "$ref": "#/components/schemas/ExceptionDto"
+#            "*/*":
+#              schema:
+#                "$ref": "#/components/schemas/ExceptionDto"
+    put:
+      tags:
+        - item-controller
+      summary: Update one item by given name and id.
+      operationId: updateItem
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/ItemDto"
+        required: true
+      responses:
+        200:
+          description: An item has been created!
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ItemDto"
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ItemDto"
+#        400:
+#          description: Error! One or several parameters do not match proper values!
+#          content:
+#            application/json:
+#              schema:
+#                "$ref": "#/components/schemas/ExceptionDto"
+#            "*/*":
+#              schema:
+#                "$ref": "#/components/schemas/ExceptionDto"
+#        409:
+#          description: Error! Given name already exists!
+#          content:
+#            application/json:
+#              schema:
+#                "$ref": "#/components/schemas/ExceptionDto"
+#            "*/*":
+#              schema:
+#                "$ref": "#/components/schemas/ExceptionDto"
+    delete:
+      tags:
+        - item-controller
+      summary: Delete one item by given id.
+      operationId: deleteItem
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        204:
+          description: An item has been deleted!
+#        400:
+#          description: Error! One or several parameters do not match proper values!
+#          content:
+#            application/json:
+#              schema:
+#                "$ref": "#/components/schemas/ExceptionDto"
+#            "*/*":
+#              schema:
+#                "$ref": "#/components/schemas/ExceptionDto"
+#        409:
+#          description: Error! Given id is used in another entity!
+#          content:
+#            application/json:
+#              schema:
+#                "$ref": "#/components/schemas/ExceptionDto"
+#            "*/*":
+#              schema:
+#                "$ref": "#/components/schemas/ExceptionDto"
+  "/items":
+    get:
+      tags:
+        - item-controller
+      summary: Get all items.
+      operationId: allItems
+      responses:
+        200:
+          description: Operation was successful!
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ItemDto'
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ItemDto"
+        204:
+          description: Unfortunately, nothing was found!
+          content:
+            application/json:
+              schema:
+                type: string
+            "*/*":
+              schema:
+                type: string
+    post:
+      tags:
+        - item-controller
+      summary: Create one item by given name.
+      operationId: createItem
+      parameters:
+        - name: name
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: available
+          in: query
+          required: true
+          schema:
+            type: boolean
+      responses:
+        201:
+          description: An item has been created!
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ItemDto"
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ItemDto"
+#        400:
+#          description: Error! One or several parameters do not match proper values!
+#          content:
+#            application/json:
+#              schema:
+#                "$ref": "#/components/schemas/ExceptionDto"
+#            "*/*":
+#              schema:
+#                "$ref": "#/components/schemas/ExceptionDto"
+#        409:
+#          description: Error! Given name already exists!
+#          content:
+#            application/json:
+#              schema:
+#                "$ref": "#/components/schemas/ExceptionDto"
+#            "*/*":
+#              schema:
+#                "$ref": "#/components/schemas/ExceptionDto"
+
+components:
+  schemas:
+    ItemDto:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Item id
+          format: uuid
+        name:
+          type: string
+          description: Item name
+        available:
+          type: boolean
+        added:
+          type: string
+          format: date
